@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpMapperAlterParameter">
+    <!--根据员工编号查询对应的员工全部信息
+    public Emp findByEmpno(int empno);
+    -->
+    <select id="findByEmpno" resultType="emp" parameterType="integer">
+        select * from emp where empno = #{empno}
+    </select>
+
+    <!--
+    查询指定部门编号和指定最低工资的员工
+    20  号部门 指定工资在1500以上的员工
+    public List<Emp> findEmpByDeptnoAndSal(int deptno,double sal);
+     大于号小于号要进行转义:&gt;为大于号
+    -->
+    <select id="findEmpByDeptnoAndSal" resultType="emp" parameterType="map">
+        select * from emp where deptno = #{deptno} and sal &gt; #{sal}
+    </select>
+
+    <!--
+     参数作为对象
+     查询10号部门工资大于3000的员工的全部信息
+     deptno sal
+    -->
+    <select id="findEmpByDeptnoAndSal1" resultType="emp" parameterType="emp">
+        select * from emp where deptno = #{deptno} and sal &gt;= #{sal}
+    </select>
+
+
+</mapper>

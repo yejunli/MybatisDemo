@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--properties的配置-->
+    <properties resource="jdbc.properties">
+    </properties>
+    <typeAliases>
+        <!--包扫描起别名  类的短路径名称首字母小写-->
+        <package name="com.msb.pojo"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc_driver}"/>
+                <property name="url" value="${jdbc_url}"/>
+                <property name="username" value="${jdbc_username}"/>
+                <property name="password" value="${jdbc_password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/msb/mapper/DeptMapper.xml"/>
+        <mapper resource="com/msb/mapper/EmpMapper.xml"/>
+        <mapper resource="com/msb/mapper/EmpMapperAlterParameter.xml"/>
+        <mapper resource="com/msb/mapper/EmpMapperIncrease.xml"/>
+    </mappers>
+</configuration>

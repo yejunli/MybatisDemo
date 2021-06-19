@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_ERR"><!--控制台打印方式-->
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+        </Console>
+        <RollingFile name="RollingFile" filename="log/test.log"
+                     filepattern="${logPath}/%d{YYYYMMddHHmmss}-fargo.log"><!--日志文件滚动方式打印和设置每天生成一个新文件-->
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" /><!--打印的格式-->
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG"><!--打印级别-->
+            <AppenderRef ref="Console" /><!--此处设置打印方式-->
+            <AppenderRef ref="RollingFile" /><!--增加打印方式-->
+        </Root>
+    </Loggers>
+</Configuration>

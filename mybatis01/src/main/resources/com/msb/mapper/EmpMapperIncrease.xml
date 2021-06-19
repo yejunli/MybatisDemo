@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpMapperIncrease">
+    <!--向数据库mydb中的Emp表格中增加一条数据-->
+    <insert id="empInsert" parameterType="emp">
+        insert  into emp values (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno});
+    </insert>
+    <!--修改上面添加的数据
+    public int updateEmp(Emp emp);
+    -->
+    <update id="updateEmp" >
+        update emp set ename = #{ename} where empno = #{empno};
+    </update>
+
+    <!--delete the Emp table
+     public int deleteEmp(int empno);
+     给定一个工号,删除小于给定的工号
+     -->
+    <delete id="deleteEmp" >
+        delete from emp where empno &lt;=#{empno};
+    </delete>
+</mapper>
