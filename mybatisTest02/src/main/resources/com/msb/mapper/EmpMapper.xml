@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msb.mapper.EmpMapper">
+    <select id="findAll" resultType="emp">
+        select * from emp;
+    </select>
+
+    <select id="findByEmpno" resultType="emp">
+        select * from emp where empno = #{empno};
+    </select>
+
+    <select id="findByDeptnoAndSal"  resultType="emp">
+        select * from emp where deptno=#{arg0} and sal &lt;= #{arg1};
+    </select>
+
+    <!--给出一个字母查询名字中包含相关关键字的名字-->
+    <select id="findByEname" resultType="emp">
+        select * from emp where ename like concat('%',#{ename},'%');
+    </select>
+    <!--List<Emp> addEmp(Emp emp);-->
+    <insert id="addEmp" >
+        insert into emp values(default,#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno});
+    </insert>
+
+    <!--int updateEmp(@Param("empno")int empno,@Param("ename") String ename);-->
+    <update id="updateEmp" >
+        update emp set ename = #{ename} where empno = #{empno};
+    </update>
+    <!--int deleteEmp(int empno);-->
+    <delete id="deleteEmp">
+        delete from emp where empno = #{empno};
+    </delete>
+    <!--int deleteByEmp(int deptno);-->
+    <delete id="deleteByEmp">
+        delete from emp where empno &lt;#{empno};
+    </delete>
+</mapper>

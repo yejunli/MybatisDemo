@@ -22,9 +22,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com/msb/mapper/DeptMapper.xml"/>
-        <mapper resource="com/msb/mapper/EmpMapper.xml"/>
-        <mapper resource="com/msb/mapper/EmpMapperAlterParameter.xml"/>
-        <mapper resource="com/msb/mapper/EmpMapperIncrease.xml"/>
+        <!--<mapper resource="com/msb/mapper/EmpMapper.xml"/>
+        <mapper resource="com/msb/mapper/DeptMapper.xml"/>-->
+        <package name="com.msb.mapper"/><!--扫描xml文件-->
     </mappers>
 </configuration>
