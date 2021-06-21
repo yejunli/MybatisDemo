@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msb.mapper.EmpMapper">
+    <!--
+    练习手动映射
+    property:接口的类
+    column:数据库表格对应的列
+    -->
+    <resultMap id="manualMapper" type="emp">
+        <id property="empno" column="empno"></id>
+        <result property="name" column="ename"></result>
+        <result property="job" column="job"></result>
+        <result property="mgr" column="mgr"></result>
+        <result property="hiredate" column="hiredate"></result>
+        <result property="sal" column="sal"></result>
+        <result property="comm" column="comm"></result>
+        <result property="deptno" column="deptno"></result>
+    </resultMap>
+    <select id="findAll" resultMap="manualMapper">
+        select * from emp
+    </select>
+</mapper>

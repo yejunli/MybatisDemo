@@ -1,7 +1,6 @@
-package com.msb;
+package test;
 
 import com.msb.mapper.EmpMapper;
-import com.msb.mapper.EmpMapper2;
 import com.msb.pojo.Emp;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,18 +12,14 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @Auther: YeZhanCHN
- * @Date: 2021/6/19 - 06 - 19 - 22:46}
- * @Description: Emp测试查询
+ * @Date: 2021/6/21 - 06 - 21 - 19:03}
+ * @Description: 查询测试
  * @version:1.0
  */
-public class TestEmpFind {
+public class FindTest {
     SqlSession sqlsession;
     @Before
     public void into (){
@@ -40,23 +35,15 @@ public class TestEmpFind {
 
     }
     @Test
-    public void testFindEmp() throws ParseException {
-        EmpMapper2 mapper = sqlsession.getMapper(EmpMapper2.class);
-        Emp emp = new Emp();
-
-        /*emp.setEname("S");
-        emp.setEmpno(7839);*/
-        emp.setHiredate(new SimpleDateFormat("yyyy/MM/dd").parse("1981/05/01"));//按照日期查询
-        List<Emp> emps = mapper.findByCondition(emp);
-        for (Emp emp1 : emps) {
-            System.out.println(emp1);
-        }
-
+    public void findEmpJoinDepnByEmpno(){
+        EmpMapper mapper = sqlsession.getMapper(EmpMapper.class);
+        Emp emp = mapper.findEmpJoinDeptByDeptno(7839);
+        System.out.println(emp);
 
     }
+
     @After
     public void close(){
         sqlsession.close();//close sqlSession
     }
-
 }
