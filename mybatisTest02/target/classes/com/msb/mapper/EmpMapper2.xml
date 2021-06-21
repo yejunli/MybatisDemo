@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msb.mapper.EmpMapper2">
+    <select id="findByCondition" resultType="emp">
+        select * from emp where 1=1
+        <if test="empno != null">
+            and empno =#{empno}
+        </if>
+        <if test="ename != null and ename != ''">
+            and ename like concat ('%',#{ename},'%')
+        </if>
+        <if test="job != null">
+            and job = #{job}
+        </if>
+        <if test="mgr != null">
+            and mgr = #{mgr}
+        </if>
+        <if test="hiredate != null">
+            and hiredate = #{hiredate}
+        </if>
+        <if test="sal != null">
+            and sal = #{sal}
+        </if>
+        <if test="comm != null">
+            and comm = #{comm}
+        </if>
+        <if test="deptno != null">
+            and deptno = #{deptno}
+        </if>
+    </select>
+</mapper>

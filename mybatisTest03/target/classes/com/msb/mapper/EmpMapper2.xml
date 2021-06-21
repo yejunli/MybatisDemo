@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msb.mapper.EmpMapper2">
+    <select id="findByCondition" resultType="emp">
+        select * from emp
+        <where>
+            <if test="empno != null">
+                and empno =#{empno}
+            </if>
+            <if test="ename != null and ename != ''">
+                and ename like concat ('%',#{ename},'%')
+            </if>
+            <if test="job != null">
+                and job = #{job}
+            </if>
+            <if test="mgr != null">
+                and mgr = #{mgr}
+            </if>
+            <if test="hiredate != null">
+                and hiredate = #{hiredate}
+            </if>
+            <if test="sal != null">
+                and sal = #{sal}
+            </if>
+            <if test="comm != null">
+                and comm = #{comm}
+            </if>
+            <if test="deptno != null">
+                and deptno = #{deptno}
+            </if>
+        </where>
+
+    </select>
+    <select id="findByCondition1" resultType="emp">
+        select * from emp
+        <where>
+            <choose>
+                <when test="empno != null">
+                    and empno =#{empno}
+                </when>
+                <when test="ename != null and ename != ''">
+                    and ename like concat ('%',#{ename},'%')
+                </when>
+                <when test="job != null">
+                    and job = #{job}
+                </when>
+                <when test="mgr != null">
+                    and mgr = #{mgr}
+                </when>
+                <when test="hiredate != null">
+                    and hiredate = #{hiredate}
+                </when>
+                <when test="sal != null">
+                    and sal = #{sal}
+                </when>
+                <when test="comm != null">
+                    and comm = #{comm}
+                </when>
+                <when test="deptno != null">
+                    and deptno = #{deptno}
+                </when>
+            </choose>
+
+        </where>
+    <!--添加员工信息-->
+    </select>
+    <insert id="insertEmp">
+        insert emp
+        <set>
+            <if test="ename != null and ename != ''">
+                ename = #{ename}
+            </if>
+            <if test="job != null and job != ''">
+                ,job = #{job}
+            </if>
+            <if test="mgr != null">
+                ,mgr = #{mgr}
+            </if>
+            <if test="hiredate != null">
+                ,hiredate = #{hiredate}
+            </if>
+            <if test="sal != null">
+                ,sal = #{sal}
+            </if>
+            <if test="comm != null">
+                ,comm = #{comm}
+            </if>
+            <if test="deptno != null">
+                ,deptno = #{deptno}
+            </if>
+
+        </set>
+    </insert>
+    <update id="updateEmp" >
+        update emp
+        <set>
+            <if test="ename != null and ename != ''">
+                ,ename = #{ename}
+            </if>
+            <if test="job != null and job != ''">
+                ,job = #{job}
+            </if>
+            <if test="mgr != null">
+                ,mgr = #{mgr}
+            </if>
+            <if test="hiredate != null">
+                ,hiredate = #{hiredate}
+            </if>
+            <if test="sal != null">
+                ,sal = #{sal}
+            </if>
+            <if test="comm != null">
+                ,comm = #{comm}
+            </if>
+            <if test="deptno != null">
+                ,deptno = #{deptno}
+            </if>
+
+        </set>
+        where empno = #{empno};
+    </update>
+    <!--
+    trim of prefix of practice
+    prefix=要添加的前缀
+    prefixOverrides=要删除的
+    suffix=要添加的后缀-->
+
+    <update id="updateEmpTrim" >
+
+        <trim prefix="update emp set" prefixOverrides="," suffix="where empno = #{empno};">
+            <if test="ename != null and ename != ''">
+                ,ename = #{ename}
+            </if>
+            <if test="job != null and job != ''">
+                ,job = #{job}
+            </if>
+            <if test="mgr != null">
+                ,mgr = #{mgr}
+            </if>
+            <if test="hiredate != null">
+                ,hiredate = #{hiredate}
+            </if>
+            <if test="sal != null">
+                ,sal = #{sal}
+            </if>
+            <if test="comm != null">findEmpsInt
+                ,comm = #{comm}
+            </if>
+            <if test="deptno != null">
+                ,deptno = #{deptno}
+            </if>
+
+        </trim>
+    </update>
+
+    <!--List<Emp> findEmpnos1(int[] empnos);-->
+    <select id="findEmpnos1" resultType="emp">
+        select * from emp where empno in
+        <foreach collection="array" separator="," open="(" close=")" item="empnos">
+            #{empnos}
+        </foreach>
+    </select>
+
+
+
+    <!--List<Emp> findEmpnos2(ArrayList<Integer> empnos);-->
+    <select id="findEmpnos2" resultType="emp">
+        select * from emp where empno in
+        <foreach collection="list" separator="," open="(" close=")" item="empnos">
+            #{empnos}
+        </foreach>
+    </select>
+</mapper>
